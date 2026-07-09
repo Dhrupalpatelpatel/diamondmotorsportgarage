@@ -49,6 +49,137 @@
             transition: opacity 0.6s ease, visibility 0.6s ease;
         }
 
+        .contact-section{
+    background:#111111;
+    padding:60px 20px;
+}
+
+.contact-card{
+    max-width:700px;
+    margin:auto;
+    background:#1a1a1a;
+    border:1px solid #2d2d2d;
+    border-radius:18px;
+    padding:40px;
+    box-shadow:0 15px 40px rgba(0,0,0,.45);
+}
+
+.contact-card h2{
+    color:#fff;
+    font-size:34px;
+    font-weight:700;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+.contact-card p{
+    color:#b8b8b8;
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    color:#fff;
+    margin-bottom:8px;
+    font-size:15px;
+    font-weight:600;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:15px 18px;
+    background:#262626;
+    border:1px solid #383838;
+    border-radius:10px;
+    color:#fff;
+    font-size:15px;
+    transition:.3s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder{
+    color:#888;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    outline:none;
+    border-color:#e30613;
+    box-shadow:0 0 0 3px rgba(227,6,19,.2);
+}
+
+.form-group textarea{
+    resize:vertical;
+    min-height:140px;
+}
+
+.button-group{
+    display:flex;
+    gap:15px;
+    margin-top:30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-btn,
+.whatsapp-btn{
+    flex:1;
+    padding:16px;
+    border:none;
+    border-radius:10px;
+    text-decoration:none;
+    text-align:center;
+    color:#fff;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.35s;
+}
+
+.send-btn{
+    background:#e30613;
+}
+
+.send-btn:hover{
+    background:#bf0410;
+    transform:translateY(-2px);
+}
+
+.whatsapp-btn{
+    background:#25D366;
+}
+
+.whatsapp-btn:hover{
+    background:#1fb85a;
+    transform:translateY(-2px);
+}
+
+@media(max-width:768px){
+
+.contact-card{
+    padding:25px;
+}
+
+.contact-card h2{
+    font-size:28px;
+}
+
+.button-group{
+    flex-direction:column;
+}
+
+.send-btn,
+.whatsapp-btn{
+    width:100%;
+}
+
+}
         .logos{
             width: 100%;
         }
@@ -895,6 +1026,49 @@
         </div>
     </section>
 
+    <section class="faq">
+        <div class="contact-card">
+    <h2>Send Us a Message</h2>
+    <p>Fill out the form below and we'll get back to you shortly.</p>
+
+    <form id="contactForm">
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Vehicle</label>
+            <input type="text" id="vehicle" placeholder="Vehicle Name">
+        </div>
+
+        <div class="form-group">
+            <label>What do you need?</label>
+            <textarea id="need" rows="5" placeholder="Describe your requirement"></textarea>
+        </div>
+
+        <div class="button-group">
+         
+
+            <a
+                id="whatsappBtn"
+                href="https://wa.me/919327657966"
+                target="_blank"
+                class="cta-btn">
+                WhatsApp Us
+            </a>
+        </div>
+
+    </form>
+</div>
+    </section>
+
     <!-- Premium Multi-Column Footer (Inspired by image_6a86b9.png) -->
     <footer class="main-footer">
         <div class="footer-grid">
@@ -1000,5 +1174,51 @@
             });
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init({
+    publicKey: "YOUR_PUBLIC_KEY"
+});
+</script>
+
+<script>
+document.getElementById("whatsappBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const vehicle = document.getElementById("vehicle").value.trim();
+    const need = document.getElementById("need").value.trim();
+
+    if (!name || !phone || !vehicle || !need) {
+        alert("Please fill in all the fields.");
+        return;
+    }
+
+    const message = `Hello Diamond Motorsport Garage,
+
+I would like to enquire about your services.
+
+━━━━━━━━━━━━━━━
+
+👤 Name : ${name}
+📞 Phone : ${phone}
+🚘 Vehicle : ${vehicle}
+
+📝 Requirement :
+${need}
+
+━━━━━━━━━━━━━━━
+
+Please contact me.`;
+
+    const whatsappURL = `https://wa.me/919327657966?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappURL, "_blank");
+});
+</script>
+
 </body>
 </html>
